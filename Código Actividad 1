@@ -1,0 +1,64 @@
+﻿int[] laboratorios = new int[5];
+string input;
+bool valido;
+
+
+for (int i = 0; i < 5; i++)
+{
+    valido = false;
+
+    while (valido == false)
+    {
+        Console.WriteLine("Ingrese la cantidad de alumnos del laboratorio " + (i + 1));
+        input = Console.ReadLine();
+
+        if (int.TryParse(input, out laboratorios[i]))
+        {
+            if (laboratorios[i] >= 0)
+            {
+                valido = true;
+            }
+            else
+            {
+                Console.WriteLine("Entrada no válida. Ingrese un número entero");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Entrada no válida. Ingrese un número entero");
+        }
+    }
+}
+
+
+int total = 0;
+int max = laboratorios[0];
+int min = laboratorios[0];
+
+for (int i = 0; i < 5; i++)
+{
+    total = total + laboratorios[i];
+
+    if (laboratorios[i] > max)
+    {
+        max = laboratorios[i];
+    }
+
+    if (laboratorios[i] < min)
+    {
+        min = laboratorios[i];
+    }
+}
+
+
+Console.WriteLine("Total de alumnos: " + total);
+Console.WriteLine("Mayor cantidad de alumnos: " + max);
+Console.WriteLine("Menor cantidad de alumnos: " + min);
+
+Console.WriteLine("Listado de alumnos por laboratorio:");
+
+foreach (int alumnos in laboratorios)
+{
+    Console.WriteLine(alumnos);
+}
+    
