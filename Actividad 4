@@ -1,0 +1,71 @@
+int[,] alumnos = new int[2, 3]; bool[,] ConInternet = new bool[2, 3]; string input; bool valido;
+
+Console.WriteLine("Desea ingresar manualmente los datos? ( Si/No )"); input = Console.ReadLine();
+
+if (input == "No" || input == "no" || input == "n" || input == "N") { alumnos[0, 0] = 25; alumnos[0, 1] = 19; alumnos[0, 2] = 23; alumnos[1, 0] = 13; alumnos[1, 1] = 15; alumnos[1, 2] = 17;
+
+ConInternet[0, 0] = false;
+ConInternet[0, 1] = true;
+ConInternet[0, 2] = false;
+ConInternet[1, 0] = false;
+ConInternet[1, 1] = true;
+ConInternet[1, 2] = false;
+}
+
+if (input == "Si" || input == "si" || input == "s" || input == "S") { for (int i = 0; i < 2; i++) { for (int j = 0; j < 3; j++) { valido = false;
+
+        while (valido == false)
+        {
+            Console.WriteLine("Ingrese la cantidad de alumnos del piso " + i + ", Laboratorio " + j);
+            input = Console.ReadLine().ToUpper();
+
+            if (int.TryParse(input, out alumnos[i, j]))
+            {
+
+                if (alumnos[i, j] >= 0)
+                {
+                    valido = true;
+                }
+                else
+                {
+                    Console.WriteLine("Ingrese un numero real");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingrese un numero real");
+            }
+        }
+        valido = false;
+
+        while (valido == false)
+        {
+            Console.WriteLine("Tiene internet? (S/N) ");
+            input = Console.ReadLine().ToUpper();
+
+            if (input == "N")
+            {
+                ConInternet[i, j] = false;
+                valido = true;
+            }
+            else
+            {
+                ConInternet[i, j] = true;
+                valido = true;
+            }
+        }
+    }
+}
+}
+
+int totalInternet = 0; int suma = 0; int cantidad = 0;
+
+for (int i = 0; i < 2; i++) { for (int j = 0; j < 3; j++) { if (ConInternet[i,j] == true) { totalInternet = totalInternet + 1; suma = suma + alumnos[i, j]; cantidad = cantidad + 1; } } }
+
+Console.WriteLine("Laboratorios con internet: " + totalInternet);
+
+if (cantidad > 0) { Console.WriteLine("Promedio: " + (suma / cantidad)); } if ( cantidad == 0) { Console.WriteLine("No hay laboratorios con internet"); }
+
+Console.WriteLine("Laboratorios en alerta:");
+
+for (int i = 0; i < 2; i++) { for (int j = 0; j < 3; j++) { if (alumnos[i, j] > 20 && ConInternet[i,j] == false) { Console.WriteLine("Lab [" + i + "," + j + "]"); } } }
