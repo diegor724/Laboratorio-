@@ -1,0 +1,112 @@
+﻿int[,] escuela = new int[2, 3];
+string input;
+bool valido;
+
+for (int i = 0; i < 2; i++) 
+{
+    for (int j = 0; j < 3; j++) 
+    {
+        valido = false;
+
+        while (valido == false)
+        {
+            Console.WriteLine("Ingrese alumnos del Piso " + i + ", Laboratorio " + j);
+            input = Console.ReadLine();
+
+            if (int.TryParse(input, out escuela[i, j]))
+            {
+                if (escuela[i, j] >= 0)
+                {
+                    valido = true;
+                }
+                else
+                {
+                    Console.WriteLine("Número inválido");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Entrada inválida");
+            }
+        }
+    }
+}
+
+
+int piso = 0;
+int laboratorio = 0;
+
+
+valido = false;
+while (valido == false)
+{
+    Console.WriteLine("Ingrese el piso que desea buscar (0 o 1):");
+    input = Console.ReadLine();
+
+    if (int.TryParse(input, out piso))
+    {
+        if (piso >= 0)
+        {
+            if (piso < 2)
+            {
+                valido = true;
+            }
+            else
+            {
+                Console.WriteLine("Ese piso no existe");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Número inválido");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Entrada inválida");
+    }
+}
+
+
+valido = false;
+while (valido == false)
+{
+    Console.WriteLine("Ingrese el laboratorio que desea buscar (0, 1 o 2):");
+    input = Console.ReadLine();
+
+    if (int.TryParse(input, out laboratorio))
+    {
+        if (laboratorio >= 0)
+        {
+            if (laboratorio < 3)
+            {
+                valido = true;
+            }
+            else
+            {
+                Console.WriteLine("Ese laboratorio no existe");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Número inválido");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Entrada inválida");
+    }
+}
+
+Console.WriteLine("Cantidad de alumnos del laboratorio y piso que busco: " + escuela[piso, laboratorio]);
+
+
+int total = 0;
+
+for (int j = 0; j < 3; j++)
+{
+    total = total + escuela[0, j];
+}
+
+Console.WriteLine("Total del piso 0: " + total);
+
