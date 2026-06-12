@@ -1,0 +1,376 @@
+int[,,] nave1 = new int[2, 3, 4];
+int[,,] nave2 = new int[2, 3, 4];
+string input;
+
+int total1 = 20;
+
+//cargamos tripulantes en la nave1 
+
+Console.WriteLine(" Bienvenido a el Starship Tactics (Battle-Sim 3D) ");
+Console.WriteLine("Primero cargaremos los datos de la nave1 ");
+
+while (total1 > 0)
+{
+    int Ala1;
+    int Capsula1;
+    int Habitacion1;
+    int carga1;
+
+
+    Console.WriteLine("\nIngrese el Ala donde desea ingresar tripulantes ( 0, 1)");
+    input = Console.ReadLine();
+    if (int.TryParse(input, out Ala1))
+    {
+        if (Ala1 == 0 || Ala1 == 1)
+        {
+            Console.WriteLine("\nIngrese a que capsula desea ingresar ( 0,1,2)");
+            input = Console.ReadLine();
+            if (int.TryParse(input, out Capsula1))
+            {
+                if (Capsula1 < 3)
+                {
+                    Console.WriteLine("\nAhora ingrese a que habitacion desea resguardar a sus tripulantes ( 0,1,2,3 )");
+                    input = Console.ReadLine();
+                    if (int.TryParse(input, out Habitacion1))
+                    {
+                        if (Habitacion1 >= 0 && Habitacion1 < 4)
+                        {
+                            Console.WriteLine("Perfecto resguardaremos a sus tripulantes en la habitación: " + Habitacion1);
+                            Console.WriteLine("Ahora diganos cuantos tripulantes desea guardar en esa habitacion: ");
+                            Console.WriteLine("\nCantidad de tripulantes que tiene actualmente disponibles:" + total1);
+                            input = Console.ReadLine();
+
+                            if (!int.TryParse(input, out carga1) || carga1 < 0)
+                            {
+                                Console.WriteLine("Cantidad inválida.");
+                                continue;
+                            }
+
+                            if (carga1 > total1)
+                            {
+                                Console.WriteLine("No tienes tantos tripulantes disponibles.");
+                                continue;
+                            }
+
+                            nave1[Ala1, Capsula1, Habitacion1] += carga1;
+
+                            total1 -= carga1;
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Numero invalido");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ingrese una habitacion existente");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ingrese un numero valido");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingrese una capsula existente");
+            }
+        }
+        else
+        {
+            Console.WriteLine("ingrese un numero valido");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Ingrese una ALa existente");
+    }
+}
+Console.Clear();
+Console.ForegroundColor = ConsoleColor.DarkBlue;
+Console.WriteLine("Nave 1 cargada correctamente!!");
+Console.ResetColor();
+
+int total2 = 20;
+
+//cargamos tripulantes en la nave2
+
+Console.WriteLine("\nAhora cargaremos los datos de la nave2 ");
+
+while (total2 > 0)
+{
+    int Ala2;
+    int Capsula2;
+    int Habitacion2;
+    int carga2;
+
+
+    Console.WriteLine("\nIngrese el Ala donde desea ingresar tripulantes ( 0, 1)");
+    input = Console.ReadLine();
+    if (int.TryParse(input, out Ala2))
+    {
+        if (Ala2 == 0 || Ala2 == 1)
+        {
+            Console.WriteLine("\nIngrese a que capsula desea ingresar ( 0,1,2)");
+            input = Console.ReadLine();
+            if (int.TryParse(input, out Capsula2))
+            {
+                if (Capsula2 < 3)
+                {
+                    Console.WriteLine("\nAhora ingrese a que habitacion desea resguardar a sus tripulantes ( 0,1,2,3 )");
+                    input = Console.ReadLine();
+                    if (int.TryParse(input, out Habitacion2))
+                    {
+                        if (Habitacion2 >= 0 && Habitacion2 < 4)
+                        {
+                            Console.WriteLine("Perfecto resguardaremos a sus tripulantes en la habitación: " + Habitacion2);
+                            Console.WriteLine("Ahora diganos cuantos tripulantes desea guardar en esa habitacion: ");
+                            Console.WriteLine("\nCantidad de tripulantes que tiene actualmente disponibles:" + total2);
+                            input = Console.ReadLine();
+
+                            if (!int.TryParse(input, out carga2) || carga2 < 0)
+                            {
+                                Console.WriteLine("Cantidad inválida.");
+                                continue;
+                            }
+
+                            if (carga2 > total2)
+                            {
+                                Console.WriteLine("No tienes tantos tripulantes disponibles.");
+                                continue;
+                            }
+
+                            nave2[Ala2, Capsula2, Habitacion2] += carga2;
+
+                            total2 -= carga2;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Numero invalido");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ingrese una habitacion existente");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Ingrese un numero valido");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingrese una capsula existente");
+            }
+        }
+        else
+        {
+            Console.WriteLine("ingrese un numero valido");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Ingrese una ALa existente");
+    }
+}
+
+Console.Clear();
+Console.ForegroundColor = ConsoleColor.DarkRed;
+Console.WriteLine("Nave 2 cargada correctamente!!"); 
+Console.ResetColor();                                                    
+                                                                       
+
+
+//Modo combate
+Console.WriteLine("Ahora comenzaremos el modo de combate:");
+Console.WriteLine("\nEl juego comenzara con el jugador de la Nave1 atacando");
+bool juegoTerminado = false;
+int turno = 1;
+
+while (!juegoTerminado)
+{
+    int alaAtaque;
+    int capsulaAtaque;
+    int habitacionAtaque;
+
+    Console.WriteLine();
+
+    if (turno == 1)
+    {
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine("TURNO DEL JUGADOR 1");
+        Console.ResetColor();
+
+        Console.WriteLine("Ingrese ala a atacar:");
+        input = Console.ReadLine();
+
+        if (!int.TryParse(input, out alaAtaque))
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 2;
+            continue;
+        }
+
+        Console.WriteLine("Ingrese cápsula a atacar:");
+        input = Console.ReadLine();
+
+        if (!int.TryParse(input, out capsulaAtaque))
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 2;
+            continue;
+        }
+
+        Console.WriteLine("Ingrese habitación a atacar:");
+        input = Console.ReadLine();
+
+        if (!int.TryParse(input, out habitacionAtaque))
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 2;
+            continue;
+        }
+
+        if (alaAtaque < 0 || alaAtaque > 1 ||
+            capsulaAtaque < 0 || capsulaAtaque > 2 ||
+            habitacionAtaque < 0 || habitacionAtaque > 3)
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 2;
+            continue;
+        }
+
+        if (nave2[alaAtaque, capsulaAtaque, habitacionAtaque] > 0)
+        {
+            nave2[alaAtaque, capsulaAtaque, habitacionAtaque] = 0;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("¡Impacto directo! Tripulación eliminada en el sector.");
+            Console.ResetColor();
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("El disparo atravesó el espacio vacío. ¡Fallaste!");
+            Console.ResetColor();
+        }
+    }
+    else
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("TURNO DEL JUGADOR 2");
+        Console.ResetColor();
+
+        Console.WriteLine("Ingrese ala a atacar:");
+        input = Console.ReadLine();
+
+        if (!int.TryParse(input, out alaAtaque))
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 1;
+            continue;
+        }
+
+        Console.WriteLine("Ingrese cápsula a atacar:");
+        input = Console.ReadLine();
+
+        if (!int.TryParse(input, out capsulaAtaque))
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 1;
+            continue;
+        }
+
+        Console.WriteLine("Ingrese habitación a atacar:");
+        input = Console.ReadLine();
+
+        if (!int.TryParse(input, out habitacionAtaque))
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 1;
+            continue;
+        }
+
+        if (alaAtaque < 0 || alaAtaque > 1 ||
+            capsulaAtaque < 0 || capsulaAtaque > 2 ||
+            habitacionAtaque < 0 || habitacionAtaque > 3)
+        {
+            Console.WriteLine("Error de cálculo en los sistemas de puntería.");
+            turno = 1;
+            continue;
+        }
+
+        if (nave1[alaAtaque, capsulaAtaque, habitacionAtaque] > 0)
+        {
+            nave1[alaAtaque, capsulaAtaque, habitacionAtaque] = 0;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("¡Impacto directo! Tripulación eliminada en el sector.");
+            Console.ResetColor();
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("El disparo atravesó el espacio vacío. ¡Fallaste!");
+            Console.ResetColor();
+        }
+    }
+
+    int sobrevivientes1 = 0;
+    int sobrevivientes2 = 0;
+
+    for (int a = 0; a < 2; a++)
+    {
+        for (int c = 0; c < 3; c++)
+        {
+            for (int h = 0; h < 4; h++)
+            {
+                sobrevivientes1 += nave1[a, c, h];
+            }
+        }
+    }
+
+    for (int a = 0; a < 2; a++)
+    {
+        for (int c = 0; c < 3; c++)
+        {
+            for (int h = 0; h < 4; h++)
+            {
+                sobrevivientes2 += nave2[a, c, h];
+            }
+        }
+    }
+
+    Console.WriteLine();
+    Console.WriteLine("Tripulantes restantes Nave 1: " + sobrevivientes1);
+    Console.WriteLine("Tripulantes restantes Nave 2: " + sobrevivientes2);
+
+    if (sobrevivientes1 == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("¡EL COMANDANTE 2 HA DOMINADO EL SECTOR!");
+        Console.ResetColor();
+        juegoTerminado = true;
+    }
+    else if (sobrevivientes2 == 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.WriteLine("¡EL COMANDANTE 1 HA DOMINADO EL SECTOR!");
+        Console.ResetColor();
+        juegoTerminado = true;
+    }
+
+    if (!juegoTerminado)
+    {
+        if (turno == 1)
+        {
+            turno = 2;
+        }
+        else
+        {
+            turno = 1;
+        }
+    }
+}
